@@ -1,0 +1,16 @@
+#!/bin/env bash
+##comment out lines by adding at least two `#' at the beginning
+#SBATCH --job-name=G5
+#SBATCH --account=silvestri
+#SBATCH --partition=highmem-inf
+#SBATCH --output=/home/peirone/%x.out
+#SBATCH --error=/home/peirone/%x.err
+#SBATCH --time=7
+#SBATCH --mem=1000
+#SBATCH --ntasks=8
+
+cd /marisdata/peirone/EFTCosmoMC_gal/
+
+export OMP_NUM_THREADS=1
+
+mpirun -np 8 ./eftcosmomc cluster_run/parameter_files/G5.ini > chains/G5.log
