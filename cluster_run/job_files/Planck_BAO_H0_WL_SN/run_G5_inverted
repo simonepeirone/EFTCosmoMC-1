@@ -1,0 +1,16 @@
+#!/bin/env bash
+##comment out lines by adding at least two `#' at the beginning
+#SBATCH --job-name=G5i_PBHWS
+#SBATCH --account=silvestri
+#SBATCH --partition=highmem-inf
+#SBATCH --output=/home/peirone/%x.out
+#SBATCH --error=/home/peirone/%x.err
+#SBATCH --time=100-00:00:00
+#SBATCH --mem=10000
+#SBATCH --ntasks=4
+
+cd /marisdata/peirone/EFTCosmoMC_G3/
+
+export OMP_NUM_THREADS=1
+
+mpirun -np 4 ./eftcosmomc cluster_run/parameter_files/Planck_BAO_H0_WL_SN/G5_inverted.ini > chains/G5_inverted_Planck_BAO_H0_WL_SN.log
